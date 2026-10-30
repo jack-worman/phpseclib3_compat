@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    bootstrap="../vendor/autoload.php"
+    failOnWarning="true"
+    failOnRisky="true"
+    failOnEmptyTestSuite="true"
+>
+    <testsuites>
+        <testsuite name="phpseclib3_compat Unit Test Suite">
+            <directory>./Unit/</directory>
+        </testsuite>
+        <testsuite name="phpseclib3_compat Functional Test Suite">
+            <directory>./Functional/</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <ini name="date.timezone" value="UTC"/>
+    </php>
+</phpunit>

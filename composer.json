@@ -1,0 +1,58 @@
+{
+    "name": "phpseclib/phpseclib3_compat",
+    "description": "phpseclib 3.0 polyfill built with phpseclib 4.0",
+    "type": "library",
+    "keywords": [
+        "security",
+        "cryptography",
+        "rsa",
+        "aes",
+        "ssh",
+        "sftp",
+        "x509",
+        "polyfill",
+        "compatibility"
+    ],
+    "homepage": "https://github.com/phpseclib/phpseclib3_compat",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jim Wigginton",
+            "email": "terrafrost@php.net",
+            "role": "Lead Developer"
+        },
+        {
+            "name": "Jack Worman",
+            "email": "jack.worman@proton.me",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/phpseclib/phpseclib3_compat/issues",
+        "source": "https://github.com/phpseclib/phpseclib3_compat"
+    },
+    "provide": {
+        "phpseclib/phpseclib": "3.0.57"
+    },
+    "require": {
+        "php": ">=8.1",
+        "phpseclib/phpseclib": "^4.0.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "phpseclib3\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "phpseclib3\\Tests\\": "tests/",
+            "phpseclib3\\CompatTests\\": "compat-tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
