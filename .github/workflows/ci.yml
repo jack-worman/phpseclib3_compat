@@ -1,0 +1,99 @@
+name: CI
+on: [push, pull_request]
+
+permissions:
+  contents: read #  to fetch code (actions/checkout)
+
+jobs:
+    lint:
+        name: Lint
+        timeout-minutes: 5
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v4
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php-version }}
+            -   name: Lint
+                run: find src compat-tests -name '*.php' -print0 | xargs -0 -n 1 php -l
+        strategy:
+            fail-fast: false
+            matrix:
+                php-version: ['8.1', '8.5']
+    tests:
+        name: Tests
+        timeout-minutes: 15
+        runs-on: ${{ matrix.os }}
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v4
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php-version }}
+            -   name: Clone phpseclib v3 and update tests
+                shell: bash
+                run: |
+                    git clone -b 3.0 --depth 1 --single-branch https://github.com/phpseclib/phpseclib.git temp
+                    mv temp/tests tests
+                    php tests/make_compatible_with_phpunit7.php
+                    php tests/make_compatible_with_phpunit9.php
+                    # make_compatible_with_phpunit12.php deletes SSH2Test.php, which update.php makes compatible instead
+                    cp tests/Functional/Net/SSH2Test.php SSH2Test.php
+                    php tests/make_compatible_with_phpunit12.php
+                    mv SSH2Test.php tests/Functional/Net/SSH2Test.php
+                    php .github/workflows/update.php
+            -   name: Composer Install
+                shell: bash
+                run: |
+                    # phpseclib 4.0.2 doesn't have the BinaryField and BigInteger fixes that phpseclib 3.0's tests
+                    # check for so the 4.0 branch is used until those fixes are in a release
+                    composer config minimum-stability dev
+                    composer config prefer-stable true
+                    composer require --no-update phpseclib/phpseclib:4.0.x-dev
+                    composer install --no-interaction
+            -   name: Setup Secure Shell Functional Tests
+                if: matrix.os == 'ubuntu-latest'
+                run: |
+                    PHPSECLIB_SSH_USERNAME='phpseclib'
+                    PHPSECLIB_SSH_PASSWORD='EePoov8po1aethu2kied1ne0'
+
+                    sudo useradd --create-home --base-dir /home "$PHPSECLIB_SSH_USERNAME"
+                    echo "$PHPSECLIB_SSH_USERNAME:$PHPSECLIB_SSH_PASSWORD" | sudo chpasswd
+                    ssh-keygen -t rsa -b 1024 -f "$HOME/.ssh/id_rsa" -q -N ""
+                    eval `ssh-agent -s`
+                    ssh-add "$HOME/.ssh/id_rsa"
+                    sudo mkdir -p "/home/$PHPSECLIB_SSH_USERNAME/.ssh/"
+                    sudo cp "$HOME/.ssh/id_rsa.pub" "/home/$PHPSECLIB_SSH_USERNAME/.ssh/authorized_keys"
+                    sudo ssh-keyscan -t rsa localhost > "/tmp/known_hosts"
+                    sudo cp "/tmp/known_hosts" "/home/$PHPSECLIB_SSH_USERNAME/.ssh/known_hosts"
+                    sudo chown "$PHPSECLIB_SSH_USERNAME:$PHPSECLIB_SSH_USERNAME" "/home/$PHPSECLIB_SSH_USERNAME/.ssh/" -R
+
+                    # OpenSSH 9.8+ penalizes sources that make lots of connections without
+                    # authenticating (eg. testCryptoAlgorithms with algorithms the server
+                    # doesn't support) and then refuses all connections from that source,
+                    # localhost included. turn that off
+                    if sudo sshd -T 2>/dev/null | grep -qi '^persourcepenalties '; then
+                        echo 'PerSourcePenalties no' | sudo tee /etc/ssh/sshd_config.d/00-phpseclib.conf
+                        sudo sshd -t
+                        sudo systemctl restart ssh
+                    fi
+
+                    echo "PHPSECLIB_SSH_HOSTNAME=localhost" >> $GITHUB_ENV
+                    echo "PHPSECLIB_SSH_USERNAME=$PHPSECLIB_SSH_USERNAME" >> $GITHUB_ENV
+                    echo "PHPSECLIB_SSH_PASSWORD=$PHPSECLIB_SSH_PASSWORD" >> $GITHUB_ENV
+                    echo "PHPSECLIB_SSH_HOME=/home/phpseclib" >> $GITHUB_ENV
+                    echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $GITHUB_ENV
+            -   name: PHPUnit
+                run: vendor/bin/phpunit --configuration tests/phpunit.xml
+            -   name: phpseclib3_compat Tests
+                # tests of the differences between phpseclib 3.0 and 4.0 that phpseclib 3.0's tests don't cover
+                if: ${{ !cancelled() }}
+                run: vendor/bin/phpunit --configuration compat-tests/phpunit.xml
+        strategy:
+            fail-fast: false
+            matrix:
+                os: [ubuntu-latest, windows-latest, macos-latest]
+                php-version: ['8.1', '8.2', '8.3', '8.4', '8.5']

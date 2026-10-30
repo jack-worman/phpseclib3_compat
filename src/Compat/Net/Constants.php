@@ -1,0 +1,208 @@
+<?php
+
+/**
+ * The global constants that phpseclib 3.0 defined when an SSH2 or SFTP object was created
+ *
+ * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
+ */
+
+namespace phpseclib3\Compat\Net;
+
+/**
+ * The global constants that phpseclib 3.0 defined when an SSH2 or SFTP object was created
+ *
+ * @internal
+ */
+abstract class Constants
+{
+    /**
+     * Name => value
+     */
+    const CONSTANTS = [
+        'NET_SSH2_MSG_DISCONNECT' => 1,
+        'NET_SSH2_MSG_IGNORE' => 2,
+        'NET_SSH2_MSG_UNIMPLEMENTED' => 3,
+        'NET_SSH2_MSG_DEBUG' => 4,
+        'NET_SSH2_MSG_SERVICE_REQUEST' => 5,
+        'NET_SSH2_MSG_SERVICE_ACCEPT' => 6,
+        'NET_SSH2_MSG_EXT_INFO' => 7,
+        'NET_SSH2_MSG_KEXINIT' => 20,
+        'NET_SSH2_MSG_NEWKEYS' => 21,
+        'NET_SSH2_MSG_KEXDH_INIT' => 30,
+        'NET_SSH2_MSG_KEXDH_REPLY' => 31,
+        'NET_SSH2_MSG_USERAUTH_REQUEST' => 50,
+        'NET_SSH2_MSG_USERAUTH_FAILURE' => 51,
+        'NET_SSH2_MSG_USERAUTH_SUCCESS' => 52,
+        'NET_SSH2_MSG_USERAUTH_BANNER' => 53,
+        'NET_SSH2_MSG_GLOBAL_REQUEST' => 80,
+        'NET_SSH2_MSG_REQUEST_SUCCESS' => 81,
+        'NET_SSH2_MSG_REQUEST_FAILURE' => 82,
+        'NET_SSH2_MSG_CHANNEL_OPEN' => 90,
+        'NET_SSH2_MSG_CHANNEL_OPEN_CONFIRMATION' => 91,
+        'NET_SSH2_MSG_CHANNEL_OPEN_FAILURE' => 92,
+        'NET_SSH2_MSG_CHANNEL_WINDOW_ADJUST' => 93,
+        'NET_SSH2_MSG_CHANNEL_DATA' => 94,
+        'NET_SSH2_MSG_CHANNEL_EXTENDED_DATA' => 95,
+        'NET_SSH2_MSG_CHANNEL_EOF' => 96,
+        'NET_SSH2_MSG_CHANNEL_CLOSE' => 97,
+        'NET_SSH2_MSG_CHANNEL_REQUEST' => 98,
+        'NET_SSH2_MSG_CHANNEL_SUCCESS' => 99,
+        'NET_SSH2_MSG_CHANNEL_FAILURE' => 100,
+        'NET_SSH2_DISCONNECT_HOST_NOT_ALLOWED_TO_CONNECT' => 1,
+        'NET_SSH2_DISCONNECT_PROTOCOL_ERROR' => 2,
+        'NET_SSH2_DISCONNECT_KEY_EXCHANGE_FAILED' => 3,
+        'NET_SSH2_DISCONNECT_RESERVED' => 4,
+        'NET_SSH2_DISCONNECT_MAC_ERROR' => 5,
+        'NET_SSH2_DISCONNECT_COMPRESSION_ERROR' => 6,
+        'NET_SSH2_DISCONNECT_SERVICE_NOT_AVAILABLE' => 7,
+        'NET_SSH2_DISCONNECT_PROTOCOL_VERSION_NOT_SUPPORTED' => 8,
+        'NET_SSH2_DISCONNECT_HOST_KEY_NOT_VERIFIABLE' => 9,
+        'NET_SSH2_DISCONNECT_CONNECTION_LOST' => 10,
+        'NET_SSH2_DISCONNECT_BY_APPLICATION' => 11,
+        'NET_SSH2_DISCONNECT_TOO_MANY_CONNECTIONS' => 12,
+        'NET_SSH2_DISCONNECT_AUTH_CANCELLED_BY_USER' => 13,
+        'NET_SSH2_DISCONNECT_NO_MORE_AUTH_METHODS_AVAILABLE' => 14,
+        'NET_SSH2_DISCONNECT_ILLEGAL_USER_NAME' => 15,
+        'NET_SSH2_OPEN_ADMINISTRATIVELY_PROHIBITED' => 1,
+        'NET_SSH2_TTY_OP_END' => 0,
+        'NET_SSH2_EXTENDED_DATA_STDERR' => 1,
+        'NET_SSH2_MSG_USERAUTH_PASSWD_CHANGEREQ' => 60,
+        'NET_SSH2_MSG_USERAUTH_PK_OK' => 60,
+        'NET_SSH2_MSG_USERAUTH_INFO_REQUEST' => 60,
+        'NET_SSH2_MSG_USERAUTH_INFO_RESPONSE' => 61,
+        'NET_SSH2_MSG_KEXDH_GEX_REQUEST_OLD' => 30,
+        'NET_SSH2_MSG_KEXDH_GEX_GROUP' => 31,
+        'NET_SSH2_MSG_KEXDH_GEX_INIT' => 32,
+        'NET_SSH2_MSG_KEXDH_GEX_REPLY' => 33,
+        'NET_SSH2_MSG_KEXDH_GEX_REQUEST' => 34,
+        'NET_SSH2_MSG_KEX_ECDH_INIT' => 30,
+        'NET_SSH2_MSG_KEX_ECDH_REPLY' => 31,
+        'NET_SFTP_INIT' => 1,
+        'NET_SFTP_VERSION' => 2,
+        'NET_SFTP_OPEN' => 3,
+        'NET_SFTP_CLOSE' => 4,
+        'NET_SFTP_READ' => 5,
+        'NET_SFTP_WRITE' => 6,
+        'NET_SFTP_LSTAT' => 7,
+        'NET_SFTP_SETSTAT' => 9,
+        'NET_SFTP_FSETSTAT' => 10,
+        'NET_SFTP_OPENDIR' => 11,
+        'NET_SFTP_READDIR' => 12,
+        'NET_SFTP_REMOVE' => 13,
+        'NET_SFTP_MKDIR' => 14,
+        'NET_SFTP_RMDIR' => 15,
+        'NET_SFTP_REALPATH' => 16,
+        'NET_SFTP_STAT' => 17,
+        'NET_SFTP_RENAME' => 18,
+        'NET_SFTP_READLINK' => 19,
+        'NET_SFTP_SYMLINK' => 20,
+        'NET_SFTP_LINK' => 21,
+        'NET_SFTP_STATUS' => 101,
+        'NET_SFTP_HANDLE' => 102,
+        'NET_SFTP_DATA' => 103,
+        'NET_SFTP_NAME' => 104,
+        'NET_SFTP_ATTRS' => 105,
+        'NET_SFTP_EXTENDED' => 200,
+        'NET_SFTP_EXTENDED_REPLY' => 201,
+        'NET_SFTP_STATUS_OK' => 0,
+        'NET_SFTP_STATUS_EOF' => 1,
+        'NET_SFTP_STATUS_NO_SUCH_FILE' => 2,
+        'NET_SFTP_STATUS_PERMISSION_DENIED' => 3,
+        'NET_SFTP_STATUS_FAILURE' => 4,
+        'NET_SFTP_STATUS_BAD_MESSAGE' => 5,
+        'NET_SFTP_STATUS_NO_CONNECTION' => 6,
+        'NET_SFTP_STATUS_CONNECTION_LOST' => 7,
+        'NET_SFTP_STATUS_OP_UNSUPPORTED' => 8,
+        'NET_SFTP_STATUS_INVALID_HANDLE' => 9,
+        'NET_SFTP_STATUS_NO_SUCH_PATH' => 10,
+        'NET_SFTP_STATUS_FILE_ALREADY_EXISTS' => 11,
+        'NET_SFTP_STATUS_WRITE_PROTECT' => 12,
+        'NET_SFTP_STATUS_NO_MEDIA' => 13,
+        'NET_SFTP_STATUS_NO_SPACE_ON_FILESYSTEM' => 14,
+        'NET_SFTP_STATUS_QUOTA_EXCEEDED' => 15,
+        'NET_SFTP_STATUS_UNKNOWN_PRINCIPAL' => 16,
+        'NET_SFTP_STATUS_LOCK_CONFLICT' => 17,
+        'NET_SFTP_STATUS_DIR_NOT_EMPTY' => 18,
+        'NET_SFTP_STATUS_NOT_A_DIRECTORY' => 19,
+        'NET_SFTP_STATUS_INVALID_FILENAME' => 20,
+        'NET_SFTP_STATUS_LINK_LOOP' => 21,
+        'NET_SFTP_STATUS_CANNOT_DELETE' => 22,
+        'NET_SFTP_STATUS_INVALID_PARAMETER' => 23,
+        'NET_SFTP_STATUS_FILE_IS_A_DIRECTORY' => 24,
+        'NET_SFTP_STATUS_BYTE_RANGE_LOCK_CONFLICT' => 25,
+        'NET_SFTP_STATUS_BYTE_RANGE_LOCK_REFUSED' => 26,
+        'NET_SFTP_STATUS_DELETE_PENDING' => 27,
+        'NET_SFTP_STATUS_FILE_CORRUPT' => 28,
+        'NET_SFTP_STATUS_OWNER_INVALID' => 29,
+        'NET_SFTP_STATUS_GROUP_INVALID' => 30,
+        'NET_SFTP_STATUS_NO_MATCHING_BYTE_RANGE_LOCK' => 31,
+        'NET_SFTP_ATTR_SIZE' => 1,
+        'NET_SFTP_ATTR_UIDGID' => 2,
+        'NET_SFTP_ATTR_OWNERGROUP' => 128,
+        'NET_SFTP_ATTR_PERMISSIONS' => 4,
+        'NET_SFTP_ATTR_ACCESSTIME' => 8,
+        'NET_SFTP_ATTR_CREATETIME' => 16,
+        'NET_SFTP_ATTR_MODIFYTIME' => 32,
+        'NET_SFTP_ATTR_ACL' => 64,
+        'NET_SFTP_ATTR_SUBSECOND_TIMES' => 256,
+        'NET_SFTP_ATTR_BITS' => 512,
+        'NET_SFTP_ATTR_ALLOCATION_SIZE' => 1024,
+        'NET_SFTP_ATTR_TEXT_HINT' => 2048,
+        'NET_SFTP_ATTR_MIME_TYPE' => 4096,
+        'NET_SFTP_ATTR_LINK_COUNT' => 8192,
+        'NET_SFTP_ATTR_UNTRANSLATED_NAME' => 16384,
+        'NET_SFTP_ATTR_CTIME' => 32768,
+        'NET_SFTP_ATTR_EXTENDED' => 2147483648,
+        'NET_SFTP_OPEN_READ' => 1,
+        'NET_SFTP_OPEN_WRITE' => 2,
+        'NET_SFTP_OPEN_APPEND' => 4,
+        'NET_SFTP_OPEN_CREATE' => 8,
+        'NET_SFTP_OPEN_TRUNCATE' => 16,
+        'NET_SFTP_OPEN_EXCL' => 32,
+        'NET_SFTP_OPEN_TEXT' => 64,
+        'NET_SFTP_OPEN_CREATE_NEW' => 0,
+        'NET_SFTP_OPEN_CREATE_TRUNCATE' => 1,
+        'NET_SFTP_OPEN_OPEN_EXISTING' => 2,
+        'NET_SFTP_OPEN_OPEN_OR_CREATE' => 3,
+        'NET_SFTP_OPEN_TRUNCATE_EXISTING' => 4,
+        'NET_SFTP_OPEN_APPEND_DATA' => 8,
+        'NET_SFTP_OPEN_APPEND_DATA_ATOMIC' => 16,
+        'NET_SFTP_OPEN_TEXT_MODE' => 32,
+        'NET_SFTP_OPEN_BLOCK_READ' => 64,
+        'NET_SFTP_OPEN_BLOCK_WRITE' => 128,
+        'NET_SFTP_OPEN_BLOCK_DELETE' => 256,
+        'NET_SFTP_OPEN_BLOCK_ADVISORY' => 512,
+        'NET_SFTP_OPEN_NOFOLLOW' => 1024,
+        'NET_SFTP_OPEN_DELETE_ON_CLOSE' => 2048,
+        'NET_SFTP_OPEN_ACCESS_AUDIT_ALARM_INFO' => 4096,
+        'NET_SFTP_OPEN_ACCESS_BACKUP' => 8192,
+        'NET_SFTP_OPEN_BACKUP_STREAM' => 16384,
+        'NET_SFTP_OPEN_OVERRIDE_OWNER' => 32768,
+        'NET_SFTP_TYPE_REGULAR' => 1,
+        'NET_SFTP_TYPE_DIRECTORY' => 2,
+        'NET_SFTP_TYPE_SYMLINK' => 3,
+        'NET_SFTP_TYPE_SPECIAL' => 4,
+        'NET_SFTP_TYPE_UNKNOWN' => 5,
+        'NET_SFTP_TYPE_SOCKET' => 6,
+        'NET_SFTP_TYPE_CHAR_DEVICE' => 7,
+        'NET_SFTP_TYPE_BLOCK_DEVICE' => 8,
+        'NET_SFTP_TYPE_FIFO' => 9,
+    ];
+
+    /**
+     * Defines the constants
+     */
+    public static function define()
+    {
+        static $defined = false;
+        if ($defined) {
+            return;
+        }
+        $defined = true;
+        foreach (self::CONSTANTS as $name => $value) {
+            if (!defined($name)) {
+                define($name, $value);
+            }
+        }
+    }
+}
